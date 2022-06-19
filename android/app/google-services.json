@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923766870988",
+    "project_id": "e19-meongguk",
+    "storage_bucket": "e19-meongguk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923766870988:android:61e7115eac614e951cc369",
+        "android_client_info": {
+          "package_name": "com.example.e19_meongguk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923766870988-ffe0fvg364u5er0pog577qu5jrcqops3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyWxmxxaps1kCN9X7hEyPJhUQ-1XOFCFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923766870988-ffe0fvg364u5er0pog577qu5jrcqops3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
