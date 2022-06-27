@@ -1,3 +1,4 @@
+import 'package:e19_meongguk/constans.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -10,7 +11,16 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favorite'),
+        leading: Container(),
+        backgroundColor: palette.bg1,
+        centerTitle: true,
+        title: Text(
+          'Favorite',
+          style: TextStyle(
+            color: palette.orange,
+          ),
+        ),
+        elevation: 0,
       ),
       body: Center(
         child: const Text(

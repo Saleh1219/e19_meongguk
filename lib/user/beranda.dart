@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e19_meongguk/constans.dart';
-import 'package:e19_meongguk/user/anjing.dart';
-import 'package:e19_meongguk/user/kucing.dart';
+import 'package:e19_meongguk/user/anjingPage.dart';
+import 'package:e19_meongguk/user/kucingPage.dart';
 import 'package:flutter/material.dart';
 
 class BerandaPage extends StatefulWidget {
@@ -36,6 +36,7 @@ class _BerandaPageState extends State<BerandaPage>
     CollectionReference barang = firestore.collection('barang');
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         centerTitle: true,
         title: Image.asset(
           'assets/VertikalMeongGuk.png',

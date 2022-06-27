@@ -1,5 +1,6 @@
 import 'package:e19_meongguk/admin/addBarang.dart';
 import 'package:e19_meongguk/admin/listBarang.dart';
+import 'package:e19_meongguk/admin/riwayatTransaksi.dart';
 import 'package:e19_meongguk/constans.dart';
 import 'package:e19_meongguk/user/beranda.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         centerTitle: true,
         title: Image.asset(
           'assets/VertikalMeongGuk.png',
@@ -170,7 +172,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => BerandaPage()),
+                        MaterialPageRoute(
+                            builder: (context) => RiwayatPemesanan()),
                       );
                     },
                   ),

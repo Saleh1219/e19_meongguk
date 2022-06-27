@@ -1,17 +1,17 @@
 import 'package:e19_meongguk/admin/editBarang.dart';
+import 'package:e19_meongguk/constans.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ItemCard extends StatelessWidget {
-  final String namaProduk;
-  final int hargaProduk;
-  final String fotoProduk;
+class TransaksiCard extends StatelessWidget {
+  final String namaPemesan;
+  final String Alamat;
   //// Pointer to Update Function
   final Function? onUpdate;
   //// Pointer to Delete Function
   final Function? onDelete;
 
-  const ItemCard(this.namaProduk, this.hargaProduk, this.fotoProduk,
+  const TransaksiCard(this.namaPemesan, this.Alamat,
       {this.onUpdate, this.onDelete});
 
   @override
@@ -27,25 +27,32 @@ class ItemCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: 80,
-            width: 80,
-            child: Image.network("$fotoProduk"),
+            height: 50,
+            width: 60,
+            margin: EdgeInsets.only(right: 20),
+            child: Icon(
+              Icons.shopping_basket,
+              color: palette.bg1,
+              size: 50.0,
+            ),
           ),
           Container(
-            width: 100,
+            width: 170,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: Text(namaProduk,
+                  child: Text(namaPemesan,
                       style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600, fontSize: 16)),
+                          fontWeight: FontWeight.w600, fontSize: 14)),
                 ),
-                Text(
-                  "Rp$hargaProduk",
-                  style: GoogleFonts.poppins(),
-                )
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(Alamat,
+                      style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.normal, fontSize: 10)),
+                ),
               ],
             ),
           ),

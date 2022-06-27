@@ -1,3 +1,4 @@
+import 'package:e19_meongguk/constans.dart';
 import 'package:flutter/material.dart';
 
 class KeranjangPage extends StatefulWidget {
@@ -10,7 +11,16 @@ class _KeranjangPageState extends State<KeranjangPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Keranjang'),
+        leading: Container(),
+        backgroundColor: palette.bg1,
+        centerTitle: true,
+        title: Text(
+          'Keranjang',
+          style: TextStyle(
+            color: palette.orange,
+          ),
+        ),
+        elevation: 0,
       ),
       body: Center(
         child: const Text(

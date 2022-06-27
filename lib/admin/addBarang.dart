@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:e19_meongguk/admin/mainAdmin.dart';
 import 'package:e19_meongguk/constans.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,6 +43,15 @@ class _DetailBarangPageState extends State<AddBarangPage> {
 
   PlatformFile? ambilFile;
 
+  Future hapusValue() async {
+    namaProCtrl.text = "";
+    KetProCtrl.text = "";
+    HargaProCtrl.text = "";
+    DeskripsiCtrl.text = "";
+    TipeCtrl.text = "";
+    // ambilFile. = "";
+  }
+
   Future pilihFile() async {
     final result = await FilePicker.platform.pickFiles();
     if (result == null) return;
@@ -67,6 +77,7 @@ class _DetailBarangPageState extends State<AddBarangPage> {
       'namaProduk': namaProCtrl.text,
       'keteranganProduk': KetProCtrl.text,
       'hargaProduk': int.tryParse(HargaProCtrl.text) ?? 0,
+      'deskripsiProduk': DeskripsiCtrl.text,
       'tipeProduk': TipeCtrl.text,
       'foto': url,
     });
@@ -76,6 +87,7 @@ class _DetailBarangPageState extends State<AddBarangPage> {
     HargaProCtrl.text = "";
     DeskripsiCtrl.text = "";
     TipeCtrl.text = selectedType.toString();
+    // hapusValue();
   }
 
   @override
@@ -86,6 +98,27 @@ class _DetailBarangPageState extends State<AddBarangPage> {
     CollectionReference barang = firestore.collection('barang');
     return Scaffold(
       appBar: AppBar(
+        leading: Container(
+          width: 50,
+          height: 50,
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.circular(25),
+          //   color: Color.fromARGB(61, 0, 0, 0),
+          // ),
+          child: IconButton(
+            icon: Icon(Icons.keyboard_arrow_left),
+            iconSize: 30,
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return AdminMainPage();
+                }),
+              );
+            },
+          ),
+        ),
         centerTitle: true,
         title: Text(
           "TAMBAH DATA",
@@ -171,6 +204,7 @@ class _DetailBarangPageState extends State<AddBarangPage> {
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 20),
                 child: TextFormField(
                   controller: DeskripsiCtrl,
+                  maxLines: 5,
                   decoration: InputDecoration(
                     hintText: "Masukkan Deskripsi Produk",
                     labelText: "Deskripsi",
@@ -202,6 +236,7 @@ class _DetailBarangPageState extends State<AddBarangPage> {
                       ),
                     ),
                     DropdownButton(
+                      itemHeight: 60,
                       items: _produkType
                           .map(
                             (value) => DropdownMenuItem(
@@ -228,21 +263,40 @@ class _DetailBarangPageState extends State<AddBarangPage> {
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 20),
                 width: lebar,
                 child: Row(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            pilihFile();
-                          },
-                          child: Text("Pilih Foto")),
+                      margin: EdgeInsets.only(right: 20),
+                      child: Icon(
+                        Icons.image,
+                        color: palette.bg1,
+                        size: 25.0,
+                      ),
                     ),
-                    Text(ambilFile != null ? "${ambilFile!.name}" : ""),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          // margin: EdgeInsets.only(left: 10, right: 10),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              pilihFile();
+                            },
+                            child: Text("Pilih Foto"),
+                          ),
+                        ),
+                        Container(
+                          width: 250,
+                          child: Text(
+                              ambilFile != null ? "${ambilFile!.name}" : ""),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 30, left: 30, right: 30),
+                margin: EdgeInsets.all(30),
                 height: 40,
                 width: lebar,
                 child: Container(
@@ -250,12 +304,17 @@ class _DetailBarangPageState extends State<AddBarangPage> {
                     onPressed: () async {
                       unggahFile(ambilFile);
 
-                      CoolAlert.show(
-                        context: context,
-                        type: CoolAlertType.success,
-                        text: "Data Berhasil Ditambahkan!",
+                      // CoolAlert.show(
+                      //   context: context,
+                      //   type: CoolAlertType.success,
+                      //   text: "Data Berhasil Ditambahkan!",
+                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return AddBarangPage();
+                        }),
                       );
-                      // kopassCtrl.text = "";
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xff354259),

@@ -1,3 +1,4 @@
+import 'package:e19_meongguk/admin/mainAdmin.dart';
 import 'package:e19_meongguk/signUp.dart';
 import 'package:e19_meongguk/splashscreen.dart';
 import 'package:e19_meongguk/user/landingpage.dart';
@@ -74,161 +75,175 @@ class _SignInPageState extends State<SignInPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance
+                  if (emailCtrl.text == "admin@gmail.com" &&
+                      passwordCtrl.text == "admin123") {
+                    FirebaseAuth.instance
                         .signInWithEmailAndPassword(
                             email: emailCtrl.text, password: passwordCtrl.text)
-                        .then(
-                          (value) => Navigator.push(
+                        .then((value) => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) {
-                              return LandingPage();
-                            }),
-                          ),
-                        );
+                            (MaterialPageRoute(
+                                builder: (context) => AdminMainPage()))));
                     emailCtrl.text = "";
                     passwordCtrl.text = "";
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'invalid-email') {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              content: Text(
-                                "Email yang anda masukkan tidak valid",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
+                  } else {
+                    try {
+                      await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: emailCtrl.text,
+                              password: passwordCtrl.text)
+                          .then(
+                            (value) => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return LandingPage();
+                              }),
+                            ),
+                          );
+                      emailCtrl.text = "";
+                      passwordCtrl.text = "";
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'invalid-email') {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Text(
+                                  "Email yang anda masukkan tidak valid",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              actions: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "OK",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                          color: Colors.black,
+                                actions: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "OK",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            );
-                          });
-                    } else if (e.code == 'wrong-password') {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              content: Text(
-                                "Email atau Password Salah",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
+                                  )
+                                ],
+                              );
+                            });
+                      } else if (e.code == 'wrong-password') {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Text(
+                                  "Email atau Password Salah",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              actions: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "OK",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                          color: Colors.black,
+                                actions: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "OK",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            );
-                          });
-                    } else if (e.code == 'user-not-found') {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              content: Text(
-                                "Email tidak ditemukan",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
+                                  )
+                                ],
+                              );
+                            });
+                      } else if (e.code == 'user-not-found') {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Text(
+                                  "Email tidak ditemukan",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              actions: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "OK",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                          color: Colors.black,
+                                actions: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "OK",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            );
-                          });
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              content: Text(
-                                "mohon masukkan Email dan Password",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
+                                  )
+                                ],
+                              );
+                            });
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Text(
+                                  "mohon masukkan Email dan Password",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              actions: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "OK",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                          color: Colors.black,
+                                actions: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "OK",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            );
-                          });
+                                  )
+                                ],
+                              );
+                            });
+                      }
                     }
                   }
                 },
